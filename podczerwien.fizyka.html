@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Prezentacja: Podczerwień</title>
+    <style>
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            color: white;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            animation: pulseNeonBackground 6s ease-in-out infinite;
+        }
+
+        @keyframes pulseNeonBackground {
+            0% { 
+                background-color: #1a0005; 
+                box-shadow: inset 0 0 100px rgba(255, 51, 102, 0.3);
+            }
+            50% { 
+                background-color: #2d000a; 
+                box-shadow: inset 0 0 150px rgba(255, 51, 102, 0.5);
+            }
+            100% { 
+                background-color: #1a0005; 
+                box-shadow: inset 0 0 100px rgba(255, 51, 102, 0.3);
+            }
+        }
+
+        .btn-menu {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ff3366;
+            border: 2px solid #ff3366;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .btn-menu:hover {
+            background: #ff3366;
+            color: white;
+            box-shadow: 0 0 20px rgba(255, 51, 102, 0.7);
+        }
+
+        /* Poprawiona struktura slajdu - brak nakładania i bezpieczny scroll */
+        section {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Treść wyrównana od góry, by nie ucinało na telefonie */
+            align-items: center;
+            padding: 80px 20px 120px 20px; /* Zapas na górny i dolny pasek */
+            text-align: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 1;
+            overflow-y: auto; /* W razie potrzeby slajd można przewijać palcem */
+            background: transparent;
+        }
+
+        section.active {
+            opacity: 1;
+            visibility: visible;
+            z-index: 2;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #ff3366;
+            text-shadow: 0 0 15px rgba(255, 51, 102, 0.7);
+        }
+
+        p {
+            font-size: 1.15rem;
+            max-width: 800px;
+            line-height: 1.6;
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+
+        b {
+            color: #ff80a0;
+        }
+
+        .list-container {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+            max-width: 750px;
+            text-align: left;
+        }
+
+        .list-item {
+            background: rgba(40, 0, 10, 0.5);
+            border-left: 4px solid #ff3366;
+            padding: 12px 15px;
+            border-radius: 0 8px 8px 0;
+            font-size: 1.05rem;
+            line-height: 1.5;
+            backdrop-filter: blur(5px);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(transparent, #1a0005 60%);
+        }
+
+        .nav-btn {
+            background: rgba(20, 0, 5, 0.9);
+            border: 2px solid #ff3366;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #ff3366;
+            box-shadow: 0 0 25px rgba(255, 51, 102, 0.8);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.15;
+            box-shadow: none;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-menu">← Menu</a>
+
+    <section id="slide1" class="active">
+        <h2>Co to jest i jak to odkryto?</h2>
+        <p><b>Podczerwień to</b> niewidzialne promieniowanie przenoszące ciepło. Każdy obiekt o temperaturze wyższej od zera bezwzględnego emituje te fale.</p>
+        <p><b>Odkrycie:</b> William Herschel badał temperaturę kolorów tęczy. Zauważył, że termometr wskazuje najwyższe ciepło <b>tuż za kolorem czerwonym</b>, tam gdzie pozornie nic nie było widać.</p>
+    </section>
+
+    <section id="slide2">
+        <h2>Jak powstaje podczerwień?</h2>
+        <p>Powstaje ona w wyniku drgań cząsteczek wewnątrz materii. Im obiekt jest cieplejszy, tym silniejsze promieniowanie wysyła w przestrzeń.</p>
+        <p><b>Podczerwień umożliwia</b> wymianę ciepła bez kontaktu fizycznego – dlatego czujemy ciepło słońca lub ogniska na odległość.</p>
+    </section>
+
+    <section id="slide3">
+        <h2>Zastosowania podczerwieni</h2>
+        <div class="list-container">
+            <div class="list-item"><b>1. Piloty TV:</b> Wysyłają impulsy, które odbiornik w TV zamienia na komendy.</div>
+            <div class="list-item"><b>2. Termowizja:</b> Pozwala widzieć ludzi w całkowitej ciemności na podstawie ich ciepła.</div>
+            <div class="list-item"><b>3. Termometry:</b> Błyskawicznie mierzą temperaturę czoła, zbierając energię IR.</div>
+            <div class="list-item"><b>4. Noktowizja:</b> Doświetla teren falami IR, które widzą tylko specjalne kamery.</div>
+            <div class="list-item"><b>5. Medycyna:</b> Lampy rozgrzewające przyspieszają leczenie urazów mięśniowych.</div>
+            <div class="list-item"><b>6. Astronomia:</b> Teleskop Webba widzi przez pył kosmiczny obiekty emitujące podczerwień.</div>
+        </div>
+    </section>
+
+    <section id="slide4">
+        <h2>Wpływ na człowieka</h2>
+        <p><b>Czy podczerwień jest szkodliwa?</b> W normalnych dawkach jest bezpieczna i pożyteczna. Pozwala nam odczuwać ciepło i pomaga w rehabilitacji.</p>
+        <p><b>Zagrożenia:</b> Silne lasery IR są groźne dla oczu. Ponieważ fali nie widać, oko nie mruga odruchowo, co może doprowadzić do uszkodzenia siatkówki.</p>
+    </section>
+
+    <div class="controls">
+        <button id="btn-prev" class="nav-btn" onclick="nav(-1)" disabled>Wstecz</button>
+        <button id="btn-next" class="nav-btn" onclick="nav(1)">Dalej</button>
+    </div>
+
+    <script>
+        let currentIdx = 1;
+        const totalSlides = 4;
+
+        function nav(dir) {
+            // UKRYWANIE obecnego slajdu przed zmianą indeksu
+            document.getElementById('slide' + currentIdx).classList.remove('active');
+
+            if (dir === 1) {
+                if (currentIdx < totalSlides) {
+                    currentIdx++;
+                } else {
+                    window.location.href = 'index.html'; 
+                    return;
+                }
+            } else if (dir === -1) {
+                if (currentIdx > 1) {
+                    currentIdx--;
+                }
+            }
+            
+            // POKAZANIE nowego slajdu
+            document.getElementById('slide' + currentIdx).classList.add('active');
+            updateUI();
+        }
+
+        function updateUI() {
+            document.getElementById('btn-prev').disabled = (currentIdx === 1);
+            document.getElementById('btn-next').innerText = (currentIdx === totalSlides) ? "Koniec" : "Dalej";
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space' || e.key === 'ArrowRight') nav(1);
+            if (e.key === 'ArrowLeft') nav(-1);
+        });
+    </script>
+</body>
+</html>
