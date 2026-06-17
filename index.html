@@ -40,89 +40,12 @@
             }
         }
 
-        /* Ekran Blokady (Pincode) */
-        #pin-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 10, 30, 0.95);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            transition: opacity 0.6s ease, visibility 0.6s ease;
-        }
-
-        .pin-container {
-            background: rgba(0, 20, 60, 0.85);
-            padding: 40px;
-            border-radius: 16px;
-            border: 3px solid #00d2ff;
-            box-shadow: 0 0 30px rgba(0, 210, 255, 0.6), inset 0 0 20px rgba(0, 210, 255, 0.2);
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
-            backdrop-filter: blur(15px);
-        }
-
-        .pin-container h2 {
-            margin-top: 0;
-            font-size: 24px;
-            color: #00d2ff;
-            text-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
-            margin-bottom: 25px;
-        }
-
-        #pin-input {
-            width: 100%;
-            padding: 15px;
-            font-size: 24px;
-            letter-spacing: 8px;
-            text-align: center;
-            background: rgba(0, 0, 0, 0.5);
-            border: 2px solid #00d2ff;
-            border-radius: 8px;
-            color: #ffffff;
-            outline: none;
-            transition: all 0.3s ease;
-            text-shadow: 0 0 10px #ffffff;
-        }
-
-        #pin-input:focus {
-            box-shadow: 0 0 15px rgba(0, 210, 255, 0.8);
-        }
-
-        .error-msg {
-            color: #ff3366;
-            font-size: 14px;
-            margin-top: 10px;
-            min-height: 20px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            text-shadow: 0 0 8px rgba(255, 51, 102, 0.8);
-        }
-
-        .shake {
-            animation: shakeAnim 0.4s ease-in-out;
-        }
-
-        @keyframes shakeAnim {
-            0%, 100% { transform: translateX(0); }
-            20%, 60% { transform: translateX(-10px); }
-            40%, 80% { transform: translateX(10px); }
-        }
-
         /* Główna Zawartość Strony */
         #main-app {
             width: 100%;
             min-height: 100vh;
-            display: none;
+            display: flex;
             flex-direction: column;
-            opacity: 0;
-            transition: opacity 0.8s ease;
             padding: 20px;
         }
 
@@ -159,7 +82,7 @@
         main {
             flex: 1;
             width: 100%;
-            max-width: 800px;
+            max-width: 850px;
             margin: 40px auto;
             display: flex;
             flex-direction: column;
@@ -192,17 +115,19 @@
             backdrop-filter: blur(5px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
+            gap: 15px;
         }
 
         .presentation-item:hover {
             border-color: #00d2ff;
             box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
-            transform: scale(1.02);
+            transform: scale(1.01);
         }
 
         .presentation-info {
             font-size: 16px;
             line-height: 1.5;
+            flex: 1;
         }
 
         .presentation-name {
@@ -214,6 +139,13 @@
         .presentation-meta {
             color: #cbd5e1;
             font-size: 14px;
+        }
+
+        /* Grupa przycisków obok siebie */
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         /* Przycisk Otwórz (Neonowy Zielony) */
@@ -229,6 +161,7 @@
             box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
             text-shadow: 0 0 5px #ffffff;
             transition: all 0.4s ease;
+            white-space: nowrap;
         }
 
         .btn-open:hover {
@@ -236,6 +169,18 @@
             color: #001133;
             box-shadow: 0 0 25px rgba(0, 255, 102, 0.8);
             transform: translateY(-1px);
+        }
+
+        /* Styl dla wersji rozszerzonej (Morski/Turkusowy neon) */
+        .btn-extended {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+        }
+
+        .btn-extended:hover {
+            background: #00ffff;
+            color: #001133;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
         }
 
         /* OKNO MODALNE (FORMULARZ I POWIADOMIENIE) */
@@ -361,11 +306,15 @@
             box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
         }
 
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .presentation-item {
                 flex-direction: column;
-                gap: 15px;
                 text-align: center;
+                padding: 20px;
+            }
+            .btn-group {
+                justify-content: center;
+                width: 100%;
             }
             header {
                 justify-content: center;
@@ -374,16 +323,6 @@
     </style>
 </head>
 <body>
-
-    <div id="pin-screen">
-        <div class="pin-container" id="pin-box">
-            <h2>Wprowadź kod dostępu</h2>
-            <div class="pin-input-wrapper">
-                <input type="password" id="pin-input" maxlength="6" placeholder="******" inputmode="numeric" autocomplete="off">
-            </div>
-            <div class="error-msg" id="error-message">Niepoprawny kod PIN! Spróbuj ponownie.</div>
-        </div>
-    </div>
 
     <div id="main-app">
         <header>
@@ -399,7 +338,10 @@
                         <span class="presentation-name">Terenoznawstwo</span> 
                         <span class="presentation-meta"> - 03.06.2026 | Przedmiot: Edukacja dla bezpieczeństwa</span>
                     </div>
-                    <a href="terenoznawstwo.edb.html" class="btn-open">Otwórz</a>
+                    <div class="btn-group">
+                        <a href="terenoznawstwo.edb.html" class="btn-open">Otwórz wersję podstawową</a>
+                        <a href="terenoznawstwo.edb+.html" class="btn-open btn-extended">Wersja Rozszerzona</a>
+                    </div>
                 </div>
 
                 <div class="presentation-item">
@@ -407,7 +349,9 @@
                         <span class="presentation-name">Promieniowanie mikrofalowe i jego zastosowanie</span> 
                         <span class="presentation-meta"> - 05.06.2026 | Przedmiot: Fizyka</span>
                     </div>
-                    <a href="mikrofale.fizyka.html" class="btn-open">Otwórz</a>
+                    <div class="btn-group">
+                        <a href="mikrofale.fizyka.html" class="btn-open">Otwórz</a>
+                    </div>
                 </div>
 
                 <div class="presentation-item">
@@ -415,7 +359,9 @@
                         <span class="presentation-name">Promieniowanie podczerwone w nauce i życiu</span> 
                         <span class="presentation-meta"> - 05.06.2026 | Przedmiot: Fizyka</span>
                     </div>
-                    <a href="podczerwień.fizyka.html" class="btn-open">Otwórz</a>
+                    <div class="btn-group">
+                        <a href="podczerwień.fizyka.html" class="btn-open">Otwórz</a>
+                    </div>
                 </div>
             </div>
         </main>
@@ -444,39 +390,6 @@
     </div>
 
     <script>
-        // --- OBSŁUGA BLOKADY PIN ---
-        const pinInput = document.getElementById('pin-input');
-        const pinScreen = document.getElementById('pin-screen');
-        const mainApp = document.getElementById('main-app');
-        const errorMessage = document.getElementById('error-message');
-        const pinBox = document.getElementById('pin-box');
-
-        // Tutaj możesz zmienić swój kod PIN
-        const CORRECT_PIN = "638492"; 
-
-        pinInput.addEventListener('input', () => {
-            if (pinInput.value.length === 6) {
-                if (pinInput.value === CORRECT_PIN) {
-                    // Prawidłowy PIN -> płynne odblokowanie
-                    pinScreen.style.opacity = '0';
-                    pinScreen.style.visibility = 'hidden';
-                    mainApp.style.display = 'flex';
-                    setTimeout(() => {
-                        mainApp.style.opacity = '1';
-                    }, 50);
-                } else {
-                    // Błędny PIN -> animacja potrząsania (shake)
-                    pinBox.classList.add('shake');
-                    errorMessage.style.opacity = '1';
-                    pinInput.value = '';
-                    
-                    setTimeout(() => {
-                        pinBox.classList.remove('shake');
-                    }, 400);
-                }
-            }
-        });
-
         // --- OBSŁUGA OKNA MODALNEGO ---
         const openModalBtn = document.getElementById('open-modal-btn');
         const closeModalBtn = document.getElementById('close-modal-btn');
