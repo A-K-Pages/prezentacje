@@ -2,434 +2,386 @@
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prezentacje</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Lekcja: Terenoznawstwo i Topografia (Rozszerzona)</title>
     <style>
-        /* Słownik resetujący i podstawowe ustawienia */
         *, *::before, *::after {
             box-sizing: border-box;
         }
 
-        body {
+        body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            overflow: hidden;
+            color: white;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow-x: hidden;
-            /* Głęboki, neonowy niebieski z płynną animacją pulsowania */
             animation: pulseNeonBackground 6s ease-in-out infinite;
         }
 
-        /* Animacja pulsowania neonowego niebieskiego tła */
         @keyframes pulseNeonBackground {
-            0% { 
-                background-color: #001133; 
-                box-shadow: inset 0 0 100px rgba(0, 110, 255, 0.4);
-            }
-            50% { 
-                background-color: #002266; 
-                box-shadow: inset 0 0 150px rgba(0, 210, 255, 0.6);
-            }
-            100% { 
-                background-color: #001133; 
-                box-shadow: inset 0 0 100px rgba(0, 110, 255, 0.4);
-            }
+            0% { background-color: #001a1a; box-shadow: inset 0 0 100px rgba(0, 255, 255, 0.15); }
+            50% { background-color: #002b2b; box-shadow: inset 0 0 150px rgba(0, 255, 255, 0.3); }
+            100% { background-color: #001a1a; box-shadow: inset 0 0 100px rgba(0, 255, 255, 0.15); }
         }
 
-        /* Główna Zawartość Strony */
-        #main-app {
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        header {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: flex-end;
-            padding: 20px 0;
-        }
-
-        /* Przycisk Prośby (Neonowy Czerwony) */
-        .btn-request {
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid #ff3366;
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-weight: bold;
-            text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(255, 51, 102, 0.4);
-            text-shadow: 0 0 5px #ffffff;
-            transition: all 0.4s ease;
-        }
-
-        .btn-request:hover {
-            background: #ff3366;
-            box-shadow: 0 0 25px rgba(255, 51, 102, 0.8), 0 0 50px rgba(255, 51, 102, 0.4);
-            transform: translateY(-2px);
-        }
-
-        main {
-            flex: 1;
-            width: 100%;
-            max-width: 850px;
-            margin: 40px auto;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 32px;
-            color: #ffffff;
-            text-shadow: 0 0 20px rgba(0, 210, 255, 0.8);
-            margin-bottom: 40px;
-        }
-
-        /* Lista Prezentacji */
-        .presentation-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-
-        .presentation-item {
-            background: rgba(0, 25, 70, 0.6);
-            border: 2px solid rgba(0, 210, 255, 0.4);
-            border-radius: 12px;
-            padding: 20px 25px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-            gap: 15px;
-        }
-
-        .presentation-item:hover {
-            border-color: #00d2ff;
-            box-shadow: 0 0 25px rgba(0, 210, 255, 0.6);
-            transform: scale(1.01);
-        }
-
-        .presentation-info {
-            font-size: 16px;
-            line-height: 1.5;
-            flex: 1;
-        }
-
-        .presentation-name {
-            font-weight: bold;
-            color: #ffffff;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
-        }
-
-        .presentation-meta {
-            color: #cbd5e1;
-            font-size: 14px;
-        }
-
-        /* Grupa przycisków obok siebie */
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        /* Przycisk Otwórz (Neonowy Zielony) */
-        .btn-open {
-            background: transparent;
-            color: #ffffff;
-            border: 2px solid #00ff66;
-            padding: 10px 20px;
+        .btn-menu {
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.6);
+            color: #00ffff;
+            border: 2px solid #00ffff;
+            padding: 8px 16px;
             border-radius: 6px;
             font-weight: bold;
             text-decoration: none;
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 255, 102, 0.4);
-            text-shadow: 0 0 5px #ffffff;
-            transition: all 0.4s ease;
-            white-space: nowrap;
+            font-size: 14px;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
         }
 
-        .btn-open:hover {
-            background: #00ff66;
-            color: #001133;
-            box-shadow: 0 0 25px rgba(0, 255, 102, 0.8);
-            transform: translateY(-1px);
-        }
-
-        /* Styl dla wersji rozszerzonej (Morski/Turkusowy neon) */
-        .btn-extended {
-            border-color: #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
-        }
-
-        .btn-extended:hover {
+        .btn-menu:hover {
             background: #00ffff;
-            color: #001133;
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+            color: #001a1a;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.7);
         }
 
-        /* OKNO MODALNE (FORMULARZ I POWIADOMIENIE) */
-        .modal-overlay {
+        .slide-counter {
             position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1001;
+            background: rgba(0, 0, 0, 0.6);
+            color: #00ffff;
+            border: 1px solid #00ffff;
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .badge-pro {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff0055;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 10px rgba(255, 0, 85, 0.5);
+        }
+
+        section {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 10, 30, 0.85);
-            backdrop-filter: blur(8px);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            z-index: 10000;
+            padding: 70px 20px 100px 20px;
+            text-align: center;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s ease;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            z-index: 1;
+            overflow-y: auto;
         }
 
-        .modal-overlay.active {
+        section.active {
             opacity: 1;
             visibility: visible;
+            z-index: 2;
         }
 
-        .modal-box {
-            background: rgba(0, 20, 60, 0.9);
-            padding: 30px;
-            border-radius: 12px;
-            border: 2px solid #ff3366;
-            box-shadow: 0 0 30px rgba(255, 51, 102, 0.5);
-            max-width: 450px;
-            width: 90%;
-            position: relative;
-            transform: scale(0.8);
-            transition: transform 0.4s ease;
-        }
-
-        .modal-overlay.active .modal-box {
-            transform: scale(1);
-        }
-
-        /* Zmiana koloru ramki dla sukcesu */
-        .modal-box.success-box {
-            border-color: #00ff66;
-            box-shadow: 0 0 30px rgba(0, 255, 102, 0.5);
-            text-align: center;
-        }
-
-        .modal-box h3 {
-            margin-top: 0;
-            color: #ffffff;
-            font-size: 22px;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
-        }
-
-        .modal-box.success-box h3 {
-            color: #00ff66;
-            text-shadow: 0 0 15px rgba(0, 255, 102, 0.8);
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: transparent;
-            border: none;
-            color: #cbd5e1;
-            font-size: 20px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: #ff3366;
-        }
-
-        .form-group {
+        h2 {
+            font-size: 1.8rem;
+            margin-top: 10px;
             margin-bottom: 15px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 14px;
-            color: #cbd5e1;
-        }
-
-        .form-group input, .form-group textarea {
-            width: 100%;
-            padding: 10px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 51, 102, 0.4);
-            border-radius: 6px;
-            color: #ffffff;
-            outline: none;
-            font-family: inherit;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus, .form-group textarea:focus {
-            border-color: #ff3366;
-            box-shadow: 0 0 10px rgba(255, 51, 102, 0.3);
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: transparent;
-            border: 2px solid #ff3366;
-            color: #ffffff;
-            padding: 12px;
-            border-radius: 6px;
             font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 51, 102, 0.2);
-            transition: all 0.3s;
+            color: #00ffff;
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+            width: 100%;
+            position: relative;
         }
 
-        .btn-submit:hover {
-            background: #ff3366;
-            box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+        p {
+            font-size: 1.05rem;
+            max-width: 850px;
+            line-height: 1.5;
+            color: #e0ffff;
+            margin-bottom: 15px;
+        }
+
+        b { color: #80ffff; }
+
+        .split-screen {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 950px;
+            gap: 20px;
+            align-items: stretch;
+            margin-top: 5px;
+        }
+
+        .text-side {
+            flex: 1.3;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 8px;
+        }
+
+        .media-side {
+            flex: 0.9;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         @media (max-width: 768px) {
-            .presentation-item {
+            .split-screen {
                 flex-direction: column;
-                text-align: center;
-                padding: 20px;
             }
-            .btn-group {
-                justify-content: center;
-                width: 100%;
-            }
-            header {
-                justify-content: center;
-            }
+        }
+
+        .list-item {
+            background: rgba(0, 25, 40, 0.6);
+            border-left: 4px solid #00ffff;
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+            backdrop-filter: blur(5px);
+            text-align: left;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .list-item.pro {
+            border-left-color: #ff0055;
+            background: rgba(40, 0, 15, 0.6);
+        }
+
+        .media-window {
+            width: 100%;
+            aspect-ratio: 4/3;
+            max-height: 240px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            background: #001a2b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #00ffff;
+            font-style: italic;
+        }
+
+        .media-window img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+            display: block;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 90px;
+            display: flex;
+            gap: 20px;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(transparent, #001a1a 60%);
+        }
+
+        .nav-btn {
+            background: rgba(0, 20, 30, 0.9);
+            border: 2px solid #00ffff;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover:not(:disabled) {
+            background: #00ffff;
+            color: #001a1a;
+            box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.15;
+            box-shadow: none;
+            cursor: not-allowed;
+            color: white;
         }
     </style>
 </head>
 <body>
 
-    <div id="main-app">
-        <header>
-            <button id="open-modal-btn" class="btn-request">Wyślij prośbę o prezentację</button>
-        </header>
+    <a href="index.html" class="btn-menu">← Menu</a>
+    <div id="slide-counter" class="slide-counter">1 / 12</div>
 
-        <main>
-            <h1 class="section-title">Aktualne Prezentacje</h1>
-            
-            <div class="presentation-list">
-                <div class="presentation-item">
-                    <div class="presentation-info">
-                        <span class="presentation-name">Terenoznawstwo</span> 
-                        <span class="presentation-meta"> - 03.06.2026 | Przedmiot: Edukacja dla bezpieczeństwa</span>
-                    </div>
-                    <div class="btn-group">
-                        <a href="terenoznawstwo.edb.html" class="btn-open">Otwórz wersję podstawową</a>
-                        <a href="terenoznawstwo.edb+.html" class="btn-open btn-extended">Wersja Rozszerzona</a>
-                    </div>
-                </div>
+    <section id="slide1" class="active">
+        <h2>Wprowadzenie do Terenoznawstwa</h2>
+        <p>Terenoznawstwo to praktyczny dział wiedzy, z którego korzysta wojsko, ratownicy, harcerze oraz turyści. Jego celem jest szybkie i bezbłędne określanie własnego położenia.</p>
+        <div style="width: 100%; max-width: 850px; display: grid; gap: 12px;">
+            <div class="list-item"><b>Terenoznawstwo:</b> Umiejętność oceny ukształtowania terenu, orientowania się w nim oraz wyznaczania bezpiecznej drogi marszu.</div>
+            <div class="list-item"><b>Topografia:</b> Nauka o przedstawianiu form powierzchni Ziemi na mapach. Stanowi teoretyczną podstawę terenoznawstwa.</div>
+            <div class="list-item"><b>Dlaczego się tego uczymy?</b> Urządzenia z GPS mogą stracić zasięg lub zasilanie. Tradycyjna nawigacja to jedyny niezawodny sposób przetrwania w trudnych warunkach i strefach zagrożenia.</div>
+        </div>
+    </section>
 
-                <div class="presentation-item">
-                    <div class="presentation-info">
-                        <span class="presentation-name">Promieniowanie mikrofalowe i jego zastosowanie</span> 
-                        <span class="presentation-meta"> - 05.06.2026 | Przedmiot: Fizyka</span>
-                    </div>
-                    <div class="btn-group">
-                        <a href="mikrofale.fizyka.html" class="btn-open">Otwórz</a>
-                    </div>
-                </div>
-
-                <div class="presentation-item">
-                    <div class="presentation-info">
-                        <span class="presentation-name">Promieniowanie podczerwone w nauce i życiu</span> 
-                        <span class="presentation-meta"> - 05.06.2026 | Przedmiot: Fizyka</span>
-                    </div>
-                    <div class="btn-group">
-                        <a href="podczerwień.fizyka.html" class="btn-open">Otwórz</a>
-                    </div>
+    <section id="slide2">
+        <h2>Mapa Topograficzna i Skala</h2>
+        <div class="split-screen">
+            <div class="text-side">
+                <div class="list-item"><b>Mapa topograficzna:</b> Zmniejszony, matematycznie określony obraz fragmentu powierzchni Ziemi na płaszczyźnie, stworzony przy użyciu znaków umownych.</div>
+                <div class="list-item"><b>Skala liczbowa (np. 1:50 000):</b> Wskazuje, ile razy obraz został pomniejszony względem rzeczywistości. 1 cm na mapie = 50 000 cm w terenie.</div>
+                <div class="list-item"><b>Jak przeliczać?</b> Aby uzyskać metry, "odcinamy" z ułamka dwa zera (1:50 000 -> 1 cm to 500 m). Aby uzyskać kilometry, odcinamy pięć zer (1 cm to 0,5 km).</div>
+            </div>
+            <div class="media-side">
+                <div class="media-window">
+                    <img src="mapa.jpg" alt="Skala i czytanie mapy" onerror="this.style.display='none'; this.parentNode.innerHTML='Miejsce na plik: mapa.jpg';">
                 </div>
             </div>
-        </main>
-    </div>
-
-    <div id="modal-overlay" class="modal-overlay">
-        <div class="modal-box" id="modal-box">
-            <button id="close-modal-btn" class="close-modal">&times;</button>
-            <h3>Poproś o nową prezentację</h3>
-            <form id="request-form">
-                <div class="form-group">
-                    <label for="req-title">Temat prezentacji:</label>
-                    <input type="text" id="req-title" required placeholder="np. Pierwsza pomoc">
-                </div>
-                <div class="form-group">
-                    <label for="req-subject">Przedmiot:</label>
-                    <input type="text" id="req-subject" required placeholder="np. EDB, Geografia">
-                </div>
-                <div class="form-group">
-                    <label for="req-desc">Dodatkowe uwagi / materiały:</label>
-                    <textarea id="req-desc" rows="4" placeholder="Opisz, co powinno znaleźć się na slajdach..."></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Wyślij prośbę</button>
-            </form>
         </div>
-    </div>
+    </section>
 
-    <script>
-        // --- OBSŁUGA OKNA MODALNEGO ---
-        const openModalBtn = document.getElementById('open-modal-btn');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const modalOverlay = document.getElementById('modal-overlay');
-        const modalBox = document.getElementById('modal-box');
-        const requestForm = document.getElementById('request-form');
+    <section id="slide3">
+        <h2>Znaki Topograficzne i Legenda</h2>
+        <p>Aby zmieścić mnóstwo informacji na małym arkuszu papieru, kartografowie używają uniwersalnego języka symboli, tzw. <b>znaków topograficznych</b>. Wszystkie objaśnione są w legendzie.</p>
+        <div style="width: 100%; max-width: 850px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="list-item"><b>Znaki konturowe (powierzchniowe):</b> Oznaczają obiekty zajmujące większy obszar, np. lasy (zielone), jeziora (niebieskie), bagna.</div>
+            <div class="list-item"><b>Znaki liniowe:</b> Zawsze zachowują długość w skali, ale rzadko szerokość. Przykłady: drogi, linie kolejowe, rzeki, linie wysokiego napięcia.</div>
+            <div class="list-item"><b>Znaki punktowe:</b> Małe, ale ważne obiekty orientacyjne, których nie da się narysować w skali (np. pojedyncze drzewo, pomnik, kapliczka).</div>
+            <div class="list-item"><b>Generalizacja:</b> To celowe upraszczanie mapy. Im mniejsza skala (np. mapa całego kraju), tym mniej szczegółów topograficznych na niej znajdziemy.</div>
+        </div>
+    </section>
 
-        openModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.add('active');
-        });
+    <section id="slide4">
+        <h2>Rzeźba Terenu i Poziomice</h2>
+        <div class="split-screen">
+            <div class="text-side">
+                <div class="list-item"><b>Rzeźba terenu:</b> Ukształtowanie pionowe powierzchni (wzniesienia i zagłębienia). Na mapach płaskich przedstawia się ją za pomocą <b>poziomic (izohips)</b>.</div>
+                <div class="list-item"><b>Zasada poziomic:</b> Są to brązowe krzywe zamknięte łączące punkty o tej samej wysokości n.p.m. <b>Złota zasada:</b> Im gęściej ułożone poziomice, tym bardziej strome zbocze.</div>
+                <div class="list-item"><b>Formy terenu:</b> Dzielimy je na <b>wypukłe</b> (np. góra, wzgórze, pagórek, grzbiet) oraz <b>wklęsłe</b> (dolina, kotlina, wąwóz). Rozpoznanie ich pozwala uniknąć wyczerpującej wspinaczki.</div>
+            </div>
+            <div class="media-side">
+                <div class="media-window">
+                    <img src="poziomice.jpg" alt="Rysunek poziomic" onerror="this.style.display='none'; this.parentNode.innerHTML='Miejsce na plik: poziomice.jpg';">
+                </div>
+            </div>
+        </div>
+    </section>
 
-        closeModalBtn.addEventListener('click', () => {
-            modalOverlay.classList.remove('active');
-        });
+    <section id="slide5">
+        <h2>Profil Terenu (Wersja Rozszerzona)</h2>
+        <span class="badge-pro">Poziom Rozszerzony</span>
+        <p>Samo czytanie poziomic pozwala wyobrazić sobie górę, ale wojsko i topografowie tworzą <b>profile terenu</b>, aby zobaczyć "przekrój" góry z boku, co pozwala planować ukrycie i pole widzenia.</p>
+        <div style="width: 100%; max-width: 850px; display: grid; gap: 12px;">
+            <div class="list-item pro"><b>Cięcie poziomicowe:</b> To różnica wysokości między dwiema sąsiednimi poziomicami. Na mapach 1:50 000 wynosi zazwyczaj 10 metrów lub 20 metrów.</div>
+            <div class="list-item pro"><b>Obliczanie nachylenia:</b> Znając odległość na mapie i różnicę wysokości z poziomic, można obliczyć kąt nachylenia stoku (np. czy dany pojazd poradzi sobie z wjazdem pod górę).</div>
+            <div class="list-item pro"><b>Kąt martwy (martwe pole):</b> Obszar niewidoczny dla obserwatora znajdującego się na szczycie wzniesienia (ukryty za wybrzuszeniem stoku). Bardzo ważne pojęcie taktyczne.</div>
+        </div>
+    </section>
 
-        modalOverlay.addEventListener('click', (e) => {
-            if (e.target === modalOverlay) {
-                modalOverlay.classList.remove('active');
-            }
-        });
+    <section id="slide6">
+        <h2>Wyznaczanie Kierunku: Kompas i Azymut</h2>
+        <div class="split-screen">
+            <div class="text-side">
+                <div class="list-item"><b>Igła magnetyczna:</b> Zawsze wskazuje północ magnetyczną. Pamiętaj, aby trzymać kompas płasko i z dala od metalu/elektroniki (min. 1 metr), aby jej nie zakłócić.</div>
+                <div class="list-item"><b>Azymut:</b> To kąt mierzony w prawo (zgodnie ze wskazówkami zegara) od kierunku północnego do kierunku marszu. Wartość azymutu podajemy w stopniach od 0° do 360°.</div>
+                <div class="list-item"><b>Deklinacja magnetyczna:</b> Niewielka różnica między północą geograficzną na mapie, a tą, którą wskazuje kompas. Przy precyzyjnych marszach na dalekie dystanse trzeba ją korygować.</div>
+            </div>
+            <div class="media-side">
+                <div class="media-window">
+                    <img src="kompas.jpg" alt="Kompas i azymut" onerror="this.style.display='none'; this.parentNode.innerHTML='Miejsce na plik: kompas.jpg';">
+                </div>
+            </div>
+        </div>
+    </section>
 
-        requestForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Ekran sukcesu wewnątrz modala
-            modalBox.innerHTML = `
-                <button id="close-success-btn" class="close-modal">&times;</button>
-                <h3>Sukces!</h3>
-                <p style="color: #cbd5e1; margin-top: 10px;">Twoja prośba o prezentację została wysłana pomyślnie.</p>
-            `;
-            modalBox.classList.add('success-box');
+    <section id="slide7">
+        <h2>Marsz na Azymut i Omijanie Przeszkód</h2>
+        <span class="badge-pro">Poziom Rozszerzony</span>
+        <p>Wyznaczenie azymutu to jedno, ale rzeczywiste utrzymanie kierunku w trudnym terenie to wyzwanie logistyczne. Często na naszej drodze staje przeszkoda (jezioro, bagna, przepaść).</p>
+        <div style="width: 100%; max-width: 850px; display: grid; gap: 12px;">
+            <div class="list-item pro"><b>Metoda charakterystycznego punktu:</b> Jeśli idziemy na dany azymut, nie patrzymy cały czas w kompas. Wybieramy drzewo lub głaz dokładnie na naszym kierunku, idziemy do niego, i od nowa wyznaczamy cel.</div>
+            <div class="list-item pro"><b>Omijanie przeszkód (kąty proste):</b> Gdy trafiamy na jezioro, skręcamy o 90 stopni (np. w prawo), liczymy kroki aż ominiemy przeszkodę. Wracamy do pierwotnego azymutu, mijamy przeszkodę, skręcamy o 90 stopni w lewo i robimy dokładnie <b>tyle samo kroków</b> co wcześniej, wracając na pierwotną linię marszu.</div>
+        </div>
+    </section>
 
-            document.getElementById('close-success-btn').addEventListener('click', () => {
-                modalOverlay.classList.remove('active');
-                setTimeout(() => {
-                    location.reload(); // Przeładuj stronę, by zresetować stan formularza
-                }, 400);
-            });
-        });
-    </script>
-</body>
-  </html>
-  
+    <section id="slide8">
+        <h2>Szacowanie Odległości w Terenie</h2>
+        <span class="badge-pro">Poziom Rozszerzony</span>
+        <p>Podczas marszu na azymut musisz wiedzieć nie tylko <b>w którą stronę</b> idziesz, ale też <b>jak daleko</b> zaszedłeś, aby nie minąć celu (tzw. martwa nawigacja).</p>
+        <div style="width: 100%; max-width: 850px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="list-item pro"><b>Parzykroki:</b> W wojsku i harcerstwie dystans liczy się w tzw. parzykrokach (każde uderzenie lewą stopą o ziemię to 1). Średnio 1 parzykrok to 1,5 metra. Mnożąc liczbę parzykroków przez 1,5, uzyskujemy metry.</div>
+            <div class="list-item pro"><b>Metoda akustyczna:</b> Głos w powietrzu rozchodzi się z prędkością ok. 340 m/s. Jeśli widzisz błyskawicę, a grzmot słyszysz 3 sekundy później, burza jest oddalona o ok. 1 kilometr.</div>
+            <div class="list-item pro"><b>Metoda wizualna:</b> Ludzkie oko przestaje rozróżniać pnie drzew z odległości 2 km, dachówki na domach z odległości 250 m, a rysy twarzy człowieka z około 50-100 metrów.</div>
+            <div class="list-item pro"><b>Prędkość marszu:</b> Dorosły człowiek w średnim terenie idzie z prędkością około 4-5 km/h. Pozwala to w przybliżeniu określić przebyty dystans na podstawie czasu (tzw. metoda czasowa).</div>
+        </div>
+    </section>
+
+    <section id="slide9">
+        <h2>Orientowanie Mapy w Terenie</h2>
+        <p>Zanim zaczniesz czytać mapę na szlaku, musisz ją "zorientować" – ułożyć tak, aby kierunki na papierze zgadzały się z rzeczywistymi kierunkami geograficznymi (północ na mapie w stronę północy w terenie).</p>
+        <div style="width: 100%; max-width: 850px; display: grid; gap: 12px;">
+            <div class="list-item"><b>Orientowanie za pomocą kompasu:</b> Kładziemy kompas na mapie. Obracamy mapę z kompasem tak, aby igła magnetyczna była równoległa do linii siatki kilometrowej (pionowych linii mapy).</div>
+            <div class="list-item"><b>Orientowanie na obiekty liniowe:</b> Stajemy na prostym odcinku drogi, rzeki lub torów, znajdujemy je na mapie i obracamy arkusz tak, by rysunek drogi pokrywał się z kierunkiem rzeczywistej drogi.</div>
+            <div class="list-item"><b>Orientowanie na obiekty w terenie:</b> Wybieramy charakterystyczny punkt przed nami (np. wieża kościoła). Szukamy go na mapie, a następnie tak obracamy mapę, by linia od nas do kościoła celowała w ten sam punkt w rzeczywistości.</div>
+        </div>
+    </section>
+
+    <section id="slide10">
+        <h2>Orientacja Przestrzenna bez Przyrządów</h2>
+        <p>W przypadku utraty sprzętu, do określenia kierunku <b>północnego (N)</b> lub <b>południowego (S)</b> wykorzystuje się naturę.</p>
+        <div style="width: 100%; max-width: 850px; display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+            <div class="list-item"><b>Słońce i zegarek:</b> Skieruj wskazówkę godzinową na Słońce. Dwusieczna kąta między tą wskazówką a cyfrą 12 wskaże kierunek <b>południowy (S)</b>.</div>
+            <div class="list-item"><b>Gwiazda Polarna (Noc):</b> Zawsze wskazuje dokładnie <b>północ (N)</b>. Szukamy Wielkiego Wozu, a następnie odmierzamy 5-krotną odległość jego tylnych kół w górę.</div>
+            <div class="list-item"><b>Drzewa i mech:</b> Mchy i porosty zazwyczaj najgęściej porastają pnie drzew oraz samotne głazy od strony, gdzie jest najmniej słońca – czyli od <b>północy (N)</b>.</div>
+            <div class="list-item"><b>Mrowiska:</b> Owady potrzebują ciepła. Stok mrowiska jest zazwyczaj łagodniejszy i bardziej rozbudowany w stronę słonecznego <b>południa (S)</b>.</div>
+        </div>
+    </section>
+
+    <section id="slide11">
+        <h2>Współrzędne i Systemy Nawigacyjne</h2>
+        <span class="badge-pro">Poziom Rozszerzony</span>
+        <p>Kiedy podajesz swoją pozycję dla służb ratunkowych na wysokim szczeblu, musisz używać znormalizowanych systemów współrzędnych.</p>
+        <div style="width: 100%; max-width: 850px; display: grid; gap: 12px;">
+            <div class="list-item pro"><b>Współrzędne geograficzne:</b> Określane przez szerokość i długość geograficzną. Zapisywane w stopniach, minutach i sekundach (np. 52°13'47"N, 21°00'42"E).</div>
+            <div class="list-item pro"><b>System UTM / MGRS:</b> Wojskowe systemy współrzędnych, opierające się na siatkach kwadratów, a nie na stopniach. Pozwalają podać pozycję z dokładnością nawet do 1 metra w znacznie szybszy i bezpieczniejszy sposób bez użycia skomplikowanych jednostek miar.</div>
+            <div class="list-item pro"><b>GPS (Global Positioning System):</b> Amerykański system nawigacji satelitarnej. Do podania dokładnej pozycji wysokościowej i horyzontalnej odbiornik potrzebuje połączenia z co najmniej 4 satelitami.</div>
+        </div>
+    </section>
+
+    <section id="slide12">
+        <h2>Bezpieczeństwo i Wzywanie Pomocy</h2>
+        <p>Samo odnalezienie się w terenie to połowa sukcesu. Kluczem do przetrwania w sytuacji awaryjnej jest szybkie poinformowanie ratowników, gdzie dokładnie się znajdujemy.</p>
+        <div style="width: 100%; max-width: 850px; display: grid; gap: 12px;">
+            <div class="list-item"><b>Słupki Pikietażowe:</b> Umieszczone co 100 m przy drogach krajowych i wojewódzkich oraz torach. Podając numer drogi (z góry słupka) i kilometr/hektometr (niżej) ratownicy trafią do Ciebie co do metra.</div>
+            <div class="list-item"><b>Słupki Oddziałowe w Lesie:</b> Znajdują się na przecięciach leśnych ścieżek (linii oddziałowych). Numery z dwóch stron pomogą leśnikom i straży pożarnej 
