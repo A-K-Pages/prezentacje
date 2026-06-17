@@ -149,61 +149,12 @@
             position: relative;
         }
 
-        .media-track {
-            display: flex;
-            width: 200%;
-            height: 100%;
-            transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .media-frame {
-            width: 50%;
-            height: 100%;
-            background: #000;
-        }
-
-        .media-frame img, .media-frame video {
+        .media-window img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             border: none;
-        }
-
-        .tutorial-toggle {
-            position: absolute;
-            bottom: -15px;
-            right: 15px;
-            background: #002b11;
-            border: 2px solid #00ff66;
-            color: #00ff66;
-            padding: 6px 12px;
-            border-radius: 8px;
-            cursor: pointer;
-            z-index: 10;
-            font-weight: bold;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            transition: all 0.3s ease;
-        }
-
-        .tutorial-toggle:hover {
-            background: #00ff66;
-            color: #001a0a;
-            transform: scale(1.05);
-        }
-
-        .tutorial-toggle span {
-            font-size: 0.65rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-        
-        .tutorial-toggle .arrow {
-            font-size: 1.1rem;
-            line-height: 1;
+            display: block;
         }
 
         .controls {
@@ -252,7 +203,6 @@
 
     <a href="index.html" class="btn-menu">← Menu</a>
 
-    <!-- SLAJD 1: WSTĘP -->
     <section id="slide1" class="active">
         <h2>Definicje i Cele Terenoznawstwa</h2>
         <p>Terenoznawstwo to dział wiedzy wojskowej i turystycznej zajmujący się badaniem terenu, orientowaniem się w nim bez przyrządów lub przy użyciu mapy i kompasu.</p>
@@ -263,7 +213,6 @@
         </div>
     </section>
 
-    <!-- SLAJD 2: KOMPAS (LOKALNE MULTIMEDIA) -->
     <section id="slide2">
         <h2>Budowa i Wykorzystanie Kompasu</h2>
         <div class="split-screen">
@@ -274,29 +223,12 @@
             </div>
             <div class="media-side">
                 <div class="media-window">
-                    <div class="media-track" id="track-compass">
-                        <div class="media-frame">
-                            <!-- Lokalny plik graficzny -->
-                            <img src="kompas.jpg" alt="Budowa kompasu i busoli">
-                        </div>
-                        <div class="media-frame">
-                            <!-- Lokalny odtwarzacz wideo -->
-                            <video controls preload="metadata">
-                                <source src="kompas.mp4" type="video/mp4">
-                                Twój telefon nie obsługuje tego formatu wideo.
-                            </video>
-                        </div>
-                    </div>
+                    <img src="kompas.jpg" alt="Budowa kompasu i busoli">
                 </div>
-                <button class="tutorial-toggle" onclick="toggleVideo('track-compass', this)">
-                    <span>Wideo / Grafika</span>
-                    <div class="arrow">⮜</div>
-                </button>
             </div>
         </div>
     </section>
 
-    <!-- SLAJD 3: MAPA (LOKALNE MULTIMEDIA) -->
     <section id="slide3">
         <h2>Analiza i Skale Mapy</h2>
         <div class="split-screen">
@@ -307,29 +239,12 @@
             </div>
             <div class="media-side">
                 <div class="media-window">
-                    <div class="media-track" id="track-map">
-                        <div class="media-frame">
-                            <!-- Lokalny plik graficzny -->
-                            <img src="mapa.jpg" alt="Odczytywanie skali i siatki">
-                        </div>
-                        <div class="media-frame">
-                            <!-- Lokalny odtwarzacz wideo -->
-                            <video controls preload="metadata">
-                                <source src="mapa.mp4" type="video/mp4">
-                                Twój telefon nie obsługuje tego formatu wideo.
-                            </video>
-                        </div>
-                    </div>
+                    <img src="mapa.jpg" alt="Odczytywanie skali i siatki">
                 </div>
-                <button class="tutorial-toggle" onclick="toggleVideo('track-map', this)">
-                    <span>Wideo / Grafika</span>
-                    <div class="arrow">⮜</div>
-                </button>
             </div>
         </div>
     </section>
 
-    <!-- SLAJD 4: RZEŹBA TERENU -->
     <section id="slide4">
         <h2>Rzeźba Terenu i Znaki Topograficzne</h2>
         <p>Zrozumienie ukształtowania pionowego (pionowej rzeźby terenu) zapobiega utknięciu w martwym punkcie lub niebezpiecznym załamaniu zbocza.</p>
@@ -341,7 +256,6 @@
         </div>
     </section>
 
-    <!-- SLAJD 5: SYTUACJE AWARYJNE -->
     <section id="slide5">
         <h2>Orientowanie bez przyrządów (Metody Naturalne)</h2>
         <p>W przypadku awarii urządzeń GPS i utraty kompasu, kierunki kardynalne (N, S, E, W) wyznacza się na podstawie obserwacji przyrody i ciał niebieskich.</p>
@@ -352,7 +266,6 @@
         </div>
     </section>
 
-    <!-- NAWIGACJA -->
     <div class="controls">
         <button id="btn-prev" class="nav-btn" onclick="nav(-1)" disabled>Wstecz</button>
         <button id="btn-next" class="nav-btn" onclick="nav(1)">Dalej</button>
@@ -360,31 +273,9 @@
 
     <script>
         let currentIdx = 1;
-        const totalSlides = 5; // Zmieniono na 5 slajdów
-
-        function toggleVideo(trackId, btnElement) {
-            const track = document.getElementById(trackId);
-            const arrow = btnElement.querySelector('.arrow');
-            
-            // Zatrzymanie wideo, jeśli użytkownik przełącza z powrotem na grafikę
-            const video = track.querySelector('video');
-            
-            if (track.style.transform === 'translateX(-50%)') {
-                track.style.transform = 'translateX(0)';
-                arrow.innerText = '⮜';
-                btnElement.style.borderColor = '#00ff66';
-                if(video) video.pause();
-            } else {
-                track.style.transform = 'translateX(-50%)';
-                arrow.innerText = '⮞';
-                btnElement.style.borderColor = '#ff3366';
-            }
-        }
+        const totalSlides = 5;
 
         function nav(dir) {
-            // Zatrzymanie wszystkich lokalnych wideo przy zmianie slajdu
-            document.querySelectorAll('video').forEach(v => v.pause());
-
             document.getElementById('slide' + currentIdx).classList.remove('active');
 
             if (dir === 1) {
