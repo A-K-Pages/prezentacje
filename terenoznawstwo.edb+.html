@@ -384,4 +384,95 @@
         <p>Samo odnalezienie się w terenie to połowa sukcesu. Kluczem do przetrwania w sytuacji awaryjnej jest szybkie poinformowanie ratowników, gdzie dokładnie się znajdujemy.</p>
         <div style="width: 100%; max-width: 850px; display: grid; gap: 12px;">
             <div class="list-item"><b>Słupki Pikietażowe:</b> Umieszczone co 100 m przy drogach krajowych i wojewódzkich oraz torach. Podając numer drogi (z góry słupka) i kilometr/hektometr (niżej) ratownicy trafią do Ciebie co do metra.</div>
-            <div class="list-item"><b>Słupki Oddziałowe w Lesie:</b> Znajdują się na przecięciach leśnych ścieżek (linii oddziałowych). Numery z dwóch stron pomogą leśnikom i straży pożarnej 
+            <div class="list-item"><b>Słupki Oddziałowe w Lesie:</b> Znajdują się na przecięciach leśnych ścieżek (linii oddziałowych). Numery z dwóch stron pomogą leśnikom i straży pożarnej pomogą leśnikom i straży pożarnej bardzo szybko określić Twoje położenie.</div>
+
+            <div class="list-item">
+                <b>Numery alarmowe:</b> W Polsce numer alarmowy to <b>112</b>. Podczas zgłoszenia należy spokojnie podać swoje położenie, liczbę poszkodowanych oraz rodzaj zagrożenia.
+            </div>
+
+            <div class="list-item">
+                <b>Zasada STOP:</b> W sytuacji zagubienia zatrzymaj się, pomyśl, obserwuj otoczenie i zaplanuj dalsze działania. Panika jest największym wrogiem orientacji w terenie.
+            </div>
+
+            <div class="list-item">
+                <b>Podsumowanie:</b> Znajomość map, kompasu, azymutów i metod orientacji pozwala bezpiecznie poruszać się w terenie nawet bez elektroniki.
+            </div>
+        </div>
+    </section>
+
+    <div class="controls">
+        <button id="prevBtn" class="nav-btn">◀ Poprzedni</button>
+        <button id="nextBtn" class="nav-btn">Dalej ▶</button>
+    </div>
+
+    <script>
+        const slides = document.querySelectorAll("section");
+        const counter = document.getElementById("slide-counter");
+        const prevBtn = document.getElementById("prevBtn");
+        const nextBtn = document.getElementById("nextBtn");
+
+        let currentSlide = 0;
+
+        function updateSlide() {
+            slides.forEach(slide => slide.classList.remove("active"));
+
+            slides[currentSlide].classList.add("active");
+
+            counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slides.length - 1;
+        }
+
+        prevBtn.addEventListener("click", () => {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+
+        nextBtn.addEventListener("click", () => {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "ArrowRight" && currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+
+            if (e.key === "ArrowLeft" && currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+
+        let startX = 0;
+
+        document.addEventListener("touchstart", (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        document.addEventListener("touchend", (e) => {
+            let endX = e.changedTouches[0].clientX;
+            let diff = startX - endX;
+
+            if (diff > 50 && currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+
+            if (diff < -50 && currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        });
+
+        updateSlide();
+    </script>
+
+</body>
+</html>
